@@ -1,0 +1,42 @@
+.MODEL SMALL
+.STACK
+.DATA
+    CHUOI1 DW 13,'MOI BAN NHAP MOT KI TU THUONG: $'
+    CHUOI2 DW 10,13,'KY TU HOA: $'
+.CODE
+    MOV AX, @DATA
+    MOV DS,AX
+    
+    BATDAU:
+    MOV DX, OFFSET CHUOI1
+    MOV AH,9
+    INT 21H
+        
+    MOV AH,1
+    INT 21H 
+    
+    KIEMTRA1: 
+    CMP AL, 'a'
+    JNB KIEMTRA2
+    JMP BATDAU
+     
+    KIEMTRA2:
+    CMP AL, 'z'
+    JNA HOPLE
+    JMP BATDAU
+    
+    HOPLE:
+    MOV CL, AL
+    MOV DX, OFFSET CHUOI2
+    MOV AH,9
+    INT 21H  
+    
+    MOV DL,CL
+    SUB DL,20h
+    MOV AH,2
+    INT 21H
+    
+    THOAT:
+    MOV AH,4CH
+    INT 21H
+END

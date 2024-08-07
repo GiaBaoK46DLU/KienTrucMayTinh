@@ -1,0 +1,59 @@
+.MODEL SMALL
+.STACK
+.DATA
+    CHUOI1 DW 13,'NHAP SO NGUYEN DUONG X1: $'
+    CHUOI3 dW 10,13,'SO NGUYEN DUONG X1 VUA NHAP LA: $'
+    CHUOI2 DW 10,13,'NHAP SO NGUYEN DUONG X2: $'
+.CODE
+    MOV AX, @DATA
+    MOV DS,AX
+    
+    BATDAU:
+    MOV DX, OFFSET CHUOI1
+    MOV AH,9
+    INT 21H
+    
+    MOV AH,1
+    INT 21H
+    
+    KIEMTRA1:
+    CMP AL,'9'
+    JNAE HOPLE1
+    JMP BATDAU
+    
+    HOPLE1:   
+    MOV CL,AL
+    MOV DL,CL
+    MOV DX, OFFSET CHUOI3
+    MOV AH,2
+    INT 21H 
+    
+    BATDAU2:
+    MOV DX, OFFSET CHUOI2
+    MOV AH,9
+    INT 21H
+    
+    MOV AH,1
+    INT 21H
+    
+    KIEMTRA2:
+    CMP AL,DL
+    JNAE KIEMTRA3
+    JMP BATDAU2
+    
+    KIEMTRA3:
+    CMP AL,'1'
+    JNB HOPLE2
+    JMP BATDAU2
+    
+    HOPLE2:
+    MOV CL,AL
+    MOV DL,CL
+    MOV AH,2
+    INT 21H
+    
+    THOAT:
+    MOV AH,4CH
+    INT 21H
+END    
+    

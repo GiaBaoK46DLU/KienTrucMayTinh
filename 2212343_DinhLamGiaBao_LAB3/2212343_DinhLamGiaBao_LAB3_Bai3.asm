@@ -1,0 +1,18 @@
+.MODEL SMALL
+.STACK 100h
+.DATA
+.CODE
+   MOV AX, @DATA
+   MOV DS, AX
+   
+   MOV AH, 2
+   MOV CX, 26
+   MOV DL ,41H
+   
+ PRINTLOOP:
+   INT 21H
+   INC DL
+   DEC CX
+   JNZ PRINTLOOP
+   
+END
